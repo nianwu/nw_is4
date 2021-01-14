@@ -3,3 +3,6 @@ obj
 .vscode
 node_modules
 IdentityServer.db
+IdentityServerAspNetIdentity/AspIdUsers.db
+IdentityServerAspNetIdentity/AspIdUsers.db-shm
+IdentityServerAspNetIdentity/AspIdUsers.db-wal
