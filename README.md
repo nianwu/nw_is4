@@ -1,3 +1,5 @@
+- https://www.cnblogs.com/wangbin5542/p/12018921.html
+
 1. 依次运行如下命令创建项目
   ```sh
   dotnet new -i IdentityServer4.Templates
