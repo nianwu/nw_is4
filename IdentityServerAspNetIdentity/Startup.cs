@@ -32,11 +32,16 @@ namespace IdentityServerAspNetIdentity
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services
+                .AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
+                        o => o.MigrationsAssembly(typeof(Startup).Assembly.FullName)));
+
+            services.AddDbContext<IdentityServerAspNetIdentityContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
                     o => o.MigrationsAssembly(typeof(Startup).Assembly.FullName)));
 
-            services.AddIdentityCore<IdentityUser>()
+            services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -102,7 +107,7 @@ namespace IdentityServerAspNetIdentity
                 options.SlidingExpiration = true;
             });
 
-            services.AddTransient<IEmailSender, EmailSender>();
+            // services.AddTransient<IEmailSender, EmailSender>();
         }
 
         public void Configure(IApplicationBuilder app)

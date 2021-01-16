@@ -15,13 +15,17 @@ namespace IdentityServerAspNetIdentity.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<IdentityServerAspNetIdentityContext>(options =>
-                    options.UseSqlite(
-                        context.Configuration.GetConnectionString("DefaultConnection")));
+            builder.ConfigureServices((context, services) =>
+            {
+                // services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                //     .AddEntityFrameworkStores<IdentityServerAspNetIdentityContext>();
 
-                services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<IdentityServerAspNetIdentityContext>();
+                // services.AddDbContext<IdentityDbContext>(options =>
+                // options.UseSqlServer(
+                //     context.Configuration.GetConnectionString("IdentityDBConnection"),
+                //     x => x.MigrationsAssembly("WebApplication1")
+                //     )
+                // );
             });
         }
     }

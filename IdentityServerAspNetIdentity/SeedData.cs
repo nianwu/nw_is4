@@ -26,6 +26,7 @@ namespace IdentityServerAspNetIdentity
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<IdentityServerAspNetIdentityContext>()
                 .AddDefaultTokenProviders();
 
             using (var serviceProvider = services.BuildServiceProvider())
