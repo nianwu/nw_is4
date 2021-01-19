@@ -15,9 +15,17 @@ document.getElementById("login").addEventListener("click", login, false);
 document.getElementById("api").addEventListener("click", api, false);
 document.getElementById("logout").addEventListener("click", logout, false);
 
-import config from "./config.js";
+// import config from "./config.js";
 
-var mgr = new Oidc.UserManager(config.oidc);
+// var mgr = new Oidc.UserManager(config.oidc);
+var mgr = new Oidc.UserManager({
+  authority: "https://localhost:5001",
+  client_id: "js",
+  redirect_uri: "http://localhost:5500/callback.html",
+  response_type: "code",
+  scope: "openid profile",
+  post_logout_redirect_uri: "http://localhost:5500/index.html",
+});
 
 mgr.getUser().then(function (user) {
   if (user) {

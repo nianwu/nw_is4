@@ -13,7 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
+using System.Linq;
 
 namespace IdentityServerAspNetIdentity
 {
@@ -109,6 +112,12 @@ namespace IdentityServerAspNetIdentity
             });
 
             // services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Test.Api", Version = "v1" });
+                new DirectoryInfo("./").GetFiles("*.xml").ToList().ForEach(file => c.IncludeXmlComments(file.FullName));
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -118,6 +127,8 @@ namespace IdentityServerAspNetIdentity
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseMigrationsEndPoint();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test.Api v1"));
             }
 
             app.UseCors(config => config
@@ -136,6 +147,7 @@ namespace IdentityServerAspNetIdentity
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }
