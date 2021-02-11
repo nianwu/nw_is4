@@ -60,7 +60,7 @@ namespace IdentityServerAspNetIdentity.Controllers
             return users;
         }
 
-        [HttpGet("[controller]")]
+        [HttpGet("[action]")]
         public int Count(
             [MinLength(2)] string keyword
         )
