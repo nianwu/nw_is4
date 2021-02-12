@@ -11,19 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServerAspNetIdentity.Controllers
 {
-    public static class UserExtend
-    {
-        public static Expression<Func<ApplicationUser, bool>> Filter(this IQueryable<ApplicationUser> e, string keyword)
-        {
-            return x =>
-                string.IsNullOrWhiteSpace(keyword)
-                || x.Id == keyword
-                || x.UserName.Contains(keyword)
-                || x.Email.Contains(keyword)
-                || x.PhoneNumber.Contains(keyword);
-        }
-    }
-
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
