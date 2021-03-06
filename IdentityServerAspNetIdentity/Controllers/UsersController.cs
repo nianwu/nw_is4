@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Duende.IdentityServer.Models;
 using IdentityServerAspNetIdentity.Models;
 using IdentityServerHost.Models;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +12,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServerAspNetIdentity.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ApiScopesController : ControllerBase
+    {
+        public void Create(
+            [FromBody, Required] ApiScopesCreateRequest request
+        )
+        {
+            var scope = new ApiScope(request.Name, request.DisplayName, request.UserClaims);
+
+            
+        }
+    }
+
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase

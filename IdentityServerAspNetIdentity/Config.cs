@@ -4,7 +4,9 @@
 
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using IdentityModel;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace IdentityServerAspNetIdentity
 {
@@ -15,6 +17,9 @@ namespace IdentityServerAspNetIdentity
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResources.Email(),
+                new IdentityResources.Phone(),
+                new IdentityResources.Address()
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -62,9 +67,9 @@ namespace IdentityServerAspNetIdentity
                     AllowedGrantTypes = GrantTypes.Code,
                     RequireClientSecret = false,
 
-                    RedirectUris =           { "http://localhost:5500/callback.html" },
+                    RedirectUris = { "http://localhost:5500/callback.html" },
                     PostLogoutRedirectUris = { "http://localhost:5500/index.html" },
-                    AllowedCorsOrigins =     { "http://localhost:5500" },
+                    AllowedCorsOrigins = { "http://localhost:5500" },
 
                     AllowedScopes =
                     {

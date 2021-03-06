@@ -65,6 +65,13 @@ namespace IdentityServerAspNetIdentity
                 .AddAspNetIdentity<ApplicationUser>();
 
             services.AddAuthentication()
+                .AddWeixin(options =>
+                {
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+
+                    options.ClientId = "";
+                    options.ClientSecret = "";
+                })
                 // .AddGoogle(options =>
                 // {
                 //     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
